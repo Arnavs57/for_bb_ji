@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Journey — A Love Timeline</title>
+  <!-- Google Fonts: Great Vibes (title), Playfair Display (headings), Poppins (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Floating animated hearts (background decoration) -->
+  <div class="hearts-bg" aria-hidden="true">
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+    <span class="heart">♥</span>
+  </div>
+
+  <!-- Romantic title: centered above the timeline, elegant script, soft glow -->
+  <h1 class="page-title">Happy Valentine's Day</h1>
+
+  <!-- Subtitle between main title and timeline -->
+  <h2 class="section-title" id="sectionTitle">Every Moment, You</h2>
+
+  <!-- Main horizontal scroll container -->
+  <main class="scroll-container" id="scrollContainer">
+    <!-- Inner wrapper: holds timeline + all milestone panels -->
+    <div class="scroll-inner">
+      <!-- Glowing central timeline line (spans full width) -->
+      <div class="timeline-line" aria-hidden="true"></div>
+
+      <!-- ========== MILESTONE 1: Texting Online ========== -->
+      <section class="milestone-panel" data-milestone="1">
+        <div class="milestone-node" data-branch="bottom">
+          <img class="milestone-image" src="images/milestone-1.png" alt="Texting Online">
+          <div class="branch branch-bottom">
+            <span class="branch-text">Late night talks 🌙</span>
+          </div>
+          <div class="branch branch-bottom branch-2">
+            <span class="branch-text">Sending random reels 😭</span>
+          </div>
+        </div>
+        <p class="milestone-label">So glad I found you</p>
+      </section>
+
+      <!-- ========== MILESTONE 2: First Call ========== -->
+      <section class="milestone-panel" data-milestone="2">
+        <div class="milestone-node" data-branch="top">
+          <img class="milestone-image" src="images/milestone-2.png" alt="First Call">
+        </div>
+        <p class="milestone-label">The moment I heard you, my heart melted</p>
+      </section>
+
+      <!-- ========== MILESTONE 3: First Meeting ========== -->
+      <section class="milestone-panel" data-milestone="3">
+        <div class="milestone-node" data-branch="bottom">
+          <img class="milestone-image" src="images/milestone-3.png" alt="First Meeting">
+        </div>
+        <p class="milestone-label">It’s always your eyes</p>
+      </section>
+
+      <!-- ========== MILESTONE 4: Growing Together ========== -->
+      <section class="milestone-panel" data-milestone="4">
+        <div class="milestone-node" data-branch="top">
+          <img class="milestone-image" src="images/milestone-4.png" alt="Growing Together">
+        </div>
+        <p class="milestone-label">Different rooms, Same moment</p>
+      </section>
+
+      <!-- ========== MILESTONE 5: Forever ========== -->
+      <section class="milestone-panel" data-milestone="5">
+        <div class="milestone-node" data-branch="bottom">
+          <img class="milestone-image" src="images/milestone-5.png" alt="Forever">
+        </div>
+        <a href="https://open.spotify.com/playlist/7DoyCnP5GPNm7aSgWso7PS?si=uQd8TEvwTECgdmsj1t4jPg&pi=z5kCJQxmR_u5u" target="_blank" class="milestone-label">Forever</a>
+      </section>
+    </div>
+  </main>
+      <!-- ========== Sound Track (click card to flip; add src="path/to/song.mp3" to each <audio> to play) ========== -->
+      <div class="sound-track">
+        <div class="sound-track-title">You Are My Favorite Sound</div>
+
+        <div class="sound-track-grid">
+          <div class="sound-track-card" data-sound-card>
+            <audio class="sound-track-audio" data-sound src="audio/Deewane.mp3" preload="metadata"></audio>
+            <div class="sound-track-card-inner">
+              <div class="sound-track-card-front">
+                <h3 class="sound-track-song">Ghani kasam sirf tera deewana su</h3>
+              </div>
+              <div class="sound-track-card-back">
+                <div class="sound-track-card-back-image">
+                  <img src="images/Deewane.png" alt="Deewane">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sound-track-card" data-sound-card>
+            <audio class="sound-track-audio" data-sound src="audio/SeetLehar.mp3" preload="metadata"></audio>
+            <div class="sound-track-card-inner">
+              <div class="sound-track-card-front">
+                <h3 class="sound-track-song">Ab toh sirf teri lehar hai</h3>
+              </div>
+              <div class="sound-track-card-back">
+                <div class="sound-track-card-back-image">
+                  <img src="images/SeetLehar.png" alt="Seet Lehar">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sound-track-card" data-sound-card>
+            <audio class="sound-track-audio" data-sound src="audio/Sheesha.mp3" preload="metadata"></audio>
+            <div class="sound-track-card-inner">
+              <div class="sound-track-card-front">
+                <h3 class="sound-track-song">Kise pachhe itne na fire jitne tere pechhe bhatk re hai</h3>
+              </div>
+              <div class="sound-track-card-back">
+                <div class="sound-track-card-back-image">
+                  <img src="images/Sheesha.png" alt="Sheesha">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sound-track-card" data-sound-card>
+            <audio class="sound-track-audio" data-sound src="audio/DoPall.mp3" preload="metadata"></audio>
+            <div class="sound-track-card-inner">
+              <div class="sound-track-card-front">
+                <h3 class="sound-track-song">All I want with you is</h3>
+              </div>
+              <div class="sound-track-card-back">
+                <div class="sound-track-card-back-image">
+                  <img src="images/DoPall.png" alt="Do Pall">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gift-container">
+          <div class="gift-text">A little gift for you</div>
+          <div class="gift-scratch-wrap">
+            <div class="gift-scratch-reveal">
+              <img class="gift-image" src="images/giftcard.png" alt="Gift">
+            </div>
+            <canvas class="gift-scratch-canvas" id="giftScratchCanvas" aria-label="Scratch to reveal"></canvas>
+            <span class="gift-scratch-hint" id="giftScratchHint">Scratch to reveal</span>
+          </div>
+        </div>
+
+        <!-- Gift image lightbox: opens on same page when user clicks after scratching -->
+        <div class="gift-lightbox" id="giftLightbox" aria-hidden="true">
+          <div class="gift-lightbox-backdrop"></div>
+          <img class="gift-lightbox-image" src="" alt="Gift">
+          <p class="gift-lightbox-hint">Click anywhere to close</p>
+        </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

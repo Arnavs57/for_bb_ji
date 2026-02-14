@@ -1,0 +1,733 @@
+/* ============================================
+   Relationship Journey Timeline — Main Styles
+   Theme: Soft romantic digital scrapbook
+   (blush, lavender, peach, cream — elegant spacing, emotional balance)
+   ============================================ */
+
+:root {
+  /* Pastel palette */
+  --blush: #f8d7da;
+  --blush-deep: #f5c6cb;
+  --lavender: #e2d5f1;
+  --lavender-deep: #d4c4e8;
+  --peach: #ffdfd3;
+  --peach-deep: #ffd0c0;
+  --cream: #fff9f5;
+  --cream-warm: #fef5ef;
+  --paper: rgba(255, 252, 248, 0.92);
+  --paper-shadow: rgba(107, 91, 115, 0.08);
+  --white-soft: rgba(255, 255, 255, 0.92);
+  --text-soft: #6b5b73;
+  --text-heading: #4a3f52;
+  /* Timeline (line and bubble centers use --timeline-y so they stay aligned) */
+  --timeline-y: 35vh;
+  --line-glow: rgba(245, 198, 203, 0.6);
+  --node-glow: rgba(255, 223, 211, 0.5);
+  --node-size: 280px;
+  --node-size-mobile: 200px;
+  /* Scrapbook spacing — elegant, breathable */
+  --panel-width: 100vw;
+  --branch-length: 120px;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.75rem;
+  --space-lg: 2.5rem;
+  --space-xl: 3.5rem;
+  --space-2xl: 4.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: var(--text-soft);
+  /* Soft scrapbook background: warm paper-like gradient + subtle texture */
+  background: linear-gradient(160deg, var(--cream) 0%, var(--cream-warm) 20%, var(--peach) 40%, var(--lavender) 65%, var(--blush) 85%, var(--cream) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle paper texture overlay (scrapbook feel) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Romantic page title (above timeline, dreamy script) ---------- */
+.page-title {
+  /* Position: fixed at top center so it stays visible above the circles */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  margin: 0;
+  padding: var(--space-md) var(--space-lg);
+  /* Elegant curvy script font */
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-size: clamp(2.75rem, 8vw, 4.75rem);
+  line-height: 1.2;
+  /* Soft rose-red: soothing, not bright; works with pastel theme */
+  color: #c75c6f;
+  /* Soft glow: layered text-shadow (light pink + soft red) for dreamy effect */
+  text-shadow:
+    0 0 20px rgba(247, 182, 194, 0.8),
+    0 0 40px rgba(231, 150, 165, 0.5),
+    0 2px 4px rgba(183, 75, 95, 0.15);
+  /* Slight letter spacing for elegance */
+  letter-spacing: 0.02em;
+  text-align: center;
+  /* Fade-in on load */
+  opacity: 0;
+  animation: title-fade-in 1.2s ease-out forwards;
+}
+
+/* Fade-in: start invisible and slightly below, end visible at final position */
+@keyframes title-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Subtitle between main title and timeline ---------- */
+.section-title {
+  position: absolute;
+  top: 22%;
+  left: 0;
+  right: 0;
+  color: #c75c6f;
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-size: clamp(2.75rem, 8vw, 4.75rem);
+  line-height: 1.2;
+  text-align: center;
+  z-index: 10;
+}
+
+/* ---------- Floating hearts (background) ---------- */
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  font-size: clamp(0.9rem, 2.2vw, 1.5rem);
+  color: var(--blush-deep);
+  opacity: 0.18;
+  animation: float-heart 14s ease-in-out infinite;
+}
+
+.heart:nth-child(1) { left: 10%; top: 15%; animation-delay: 0s; }
+.heart:nth-child(2) { left: 25%; top: 70%; animation-delay: -2s; }
+.heart:nth-child(3) { left: 60%; top: 25%; animation-delay: -4s; }
+.heart:nth-child(4) { left: 75%; top: 60%; animation-delay: -6s; }
+.heart:nth-child(5) { left: 40%; top: 85%; animation-delay: -8s; }
+.heart:nth-child(6) { left: 85%; top: 35%; animation-delay: -10s; }
+.heart:nth-child(7) { left: 5%; top: 45%; animation-delay: -1s; }
+.heart:nth-child(8) { left: 18%; top: 88%; animation-delay: -3s; }
+.heart:nth-child(9) { left: 50%; top: 12%; animation-delay: -5s; }
+.heart:nth-child(10) { left: 68%; top: 72%; animation-delay: -7s; }
+.heart:nth-child(11) { left: 92%; top: 55%; animation-delay: -9s; }
+.heart:nth-child(12) { left: 32%; top: 38%; animation-delay: -11s; }
+.heart:nth-child(13) { left: 78%; top: 18%; animation-delay: -0.5s; }
+.heart:nth-child(14) { left: 55%; top: 82%; animation-delay: -6.5s; }
+
+@keyframes float-heart {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  25% {
+    transform: translate(12px, -18px) scale(1.05);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate(-8px, 12px) scale(0.98);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translate(16px, 10px) scale(1.02);
+    opacity: 0.24;
+  }
+}
+
+/* ---------- Timeline section: only this area scrolls horizontally ---------- */
+.scroll-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100vw;
+  height: 40vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  /* Contain horizontal scroll so the rest of the page never scrolls horizontally */
+  padding: calc(var(--space-lg) + 3rem) var(--space-lg) var(--space-lg);
+  margin-top: 200px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Inner wrapper: wide content lives here; only scroll-container scrolls */
+.scroll-inner {
+  display: flex;
+  width: calc(var(--panel-width) * 5);
+  min-height: 100%;
+  position: relative;
+  padding: 0 var(--space-md);
+  /* No overflow here so scrolling is handled by parent .scroll-container */
+}
+
+/* ---------- Timeline line (center at --timeline-y so bubbles sit on it) ---------- */
+.timeline-line {
+  position: absolute;
+  left: 0;
+  top: 14%;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--lavender-deep) 4%,
+    var(--blush-deep) 18%,
+    var(--peach-deep) 38%,
+    var(--blush-deep) 58%,
+    var(--lavender-deep) 82%,
+    transparent 100%
+  );
+  border-radius: 3px;
+  box-shadow:
+    0 0 24px var(--line-glow),
+    0 2px 8px var(--paper-shadow);
+  z-index: 0;
+}
+
+/* ---------- Each milestone panel (one “page” of the scrapbook) ---------- */
+.milestone-panel {
+  flex: 0 0 var(--panel-width);
+  width: var(--panel-width);
+  min-height: 100vh;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+/* ---------- Milestone node (scrapbook circle — image inside; positioned on timeline) ---------- */
+.milestone-node {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: var(--node-size);
+  height: var(--node-size);
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(165deg, var(--paper) 0%, var(--peach) 50%, var(--white-soft) 100%);
+  box-shadow:
+    0 8px 32px var(--paper-shadow),
+    0 2px 12px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.milestone-node:hover {
+  box-shadow:
+    0 12px 40px var(--paper-shadow),
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.8),
+    0 0 40px var(--node-glow);
+}
+
+/* Image fills the bubble; when src is empty, fallback gradient shows */
+.milestone-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  object-position: center;
+  border-radius: 50%;
+  display: block;
+}
+
+.milestone-image[src=""],
+.milestone-image:not([src]) {
+  display: none;
+}
+
+/* First bubble: fit two-panel image so both figures stay visible in the circle */
+.milestone-panel[data-milestone="1"] .milestone-image {
+  object-position: center center;
+}
+
+/* Text below each timeline bubble */
+.milestone-label {
+  position: absolute;
+  top: calc(var(--timeline-y) + (var(--node-size) / 2) + 0.5rem);
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  font-weight: 600;
+  color: var(--text-heading);
+  text-align: center;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* ---------- Curved branches (alternating top/bottom) ---------- */
+.branch {
+  position: absolute;
+  width: var(--branch-length);
+  height: 2px;
+  background: linear-gradient(90deg, var(--lavender-deep), transparent);
+  border-radius: 50%;
+  opacity: 0.85;
+  /* Slight curve via box-shadow or gradient; line curves gently */
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+/* Curved effect: thin arc using border (bottom branches curve down) */
+.branch-bottom {
+  top: 100%;
+  left: 50%;
+  width: 50px;
+  height: 28px;
+  background: none;
+  border: 1.5px solid var(--blush-deep);
+  border-top: none;
+  border-radius: 0 0 50px 50px;
+  transform: translateX(-100%) translateY(-1px);
+  opacity: 0.8;
+}
+
+.branch-bottom.branch-2 {
+  left: auto;
+  right: 50%;
+  transform: translateX(100%) translateY(-1px) scaleX(-1);
+  border-radius: 0 0 50px 50px;
+}
+
+/* Top branches (for nodes with data-branch="top"): curve up */
+.milestone-node[data-branch="top"] .branch {
+  bottom: 100%;
+  left: 50%;
+  width: 50px;
+  height: 28px;
+  background: none;
+  border: 1.5px solid var(--lavender-deep);
+  border-bottom: none;
+  border-radius: 50px 50px 0 0;
+  transform: translateX(-50%) translateY(1px);
+}
+
+.milestone-node[data-branch="top"] .branch-2 {
+  margin-left: 15px;
+}
+
+.branch-text {
+  position: absolute;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-heading);
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+/* Position branch text: for bottom branches, below the curve */
+.branch-bottom .branch-text {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.5rem;
+}
+
+.branch-bottom.branch-2 .branch-text {
+  left: auto;
+  right: 0;
+  transform: translateX(50%);
+}
+
+.milestone-node[data-branch="top"] .branch-text {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Scrapbook-style alternating tilt on nodes (emotional balance) ---------- */
+.milestone-panel:nth-child(odd) .milestone-node {
+  transform: translateX(-50%) rotate(-1deg);
+}
+.milestone-panel:nth-child(odd) .milestone-node:hover {
+  transform: translateX(-50%) scale(1.06) rotate(-1deg);
+}
+.milestone-panel:nth-child(even) .milestone-node {
+  transform: translateX(-50%) rotate(1deg);
+}
+.milestone-panel:nth-child(even) .milestone-node:hover {
+  transform: translateX(-50%) scale(1.06) rotate(1deg);
+}
+
+/* ---------- Sound Track ---------- */
+.sound-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.sound-track-title {
+  margin: 0;
+  color: #c75c6f;
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-size: clamp(2.75rem, 8vw, 4.75rem);
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* 2x2 grid: equal columns and rows, gap between cards so they never overlap */
+.sound-track-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: var(--space-lg);
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Flip card: contained in its grid cell so flip doesn’t overlap neighbors */
+.sound-track-card {
+  perspective: 1000px;
+  min-height: 160px;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.sound-track-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  transition: transform 0.8s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+/* Flip on click (JS toggles .flipped) so we can play audio when card shows back */
+.sound-track-card.flipped .sound-track-card-inner {
+  transform: rotateY(180deg);
+}
+
+.sound-track-card-front,
+.sound-track-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px var(--paper-shadow);
+}
+
+.sound-track-card-front {
+  background: linear-gradient(165deg, var(--paper) 0%, var(--peach) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.sound-track-card-back {
+  background: linear-gradient(165deg, var(--lavender) 0%, var(--blush) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Image container: fills the card back and clips image to fit */
+.sound-track-card-back-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sound-track-card-back-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 12px;
+}
+
+.sound-track-song {
+  margin: 0 0 var(--space-xs);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  text-align: center;
+}
+
+.sound-track-caption {
+  margin: 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.sound-track-quote {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text-heading);
+  text-align: center;
+}
+
+.sound-track-audio {
+  display: none;
+}
+
+.gift-container {
+  position: relative;
+  top: 70%;
+  left: 0;
+  right: 0;
+  padding: 0 var(--space-lg);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.gift-text {
+  margin: 0;
+  color: #c75c6f;
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-size: clamp(2.75rem, 8vw, 4.75rem);
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Scratch-to-reveal: image underneath, canvas overlay to scratch off */
+.gift-scratch-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px var(--paper-shadow);
+}
+
+.gift-scratch-reveal {
+  position: absolute;
+  inset: 0;
+  background: var(--cream-warm);
+}
+
+.gift-scratch-reveal .gift-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.gift-scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.gift-scratch-canvas:active {
+  cursor: grabbing;
+}
+
+.gift-scratch-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+}
+
+.gift-scratch-hint.gift-scratch-hint-hidden {
+  opacity: 0;
+}
+
+/* ---------- Responsive: tablet & mobile (elegant spacing preserved) ---------- */
+@media (max-width: 768px) {
+  :root {
+    --node-size: var(--node-size-mobile);
+    --branch-length: 90px;
+  }
+
+  .scroll-container {
+    padding: var(--space-md) 0;
+  }
+
+  .scroll-inner {
+    width: calc(100vw * 5);
+    padding: 0 var(--space-sm);
+  }
+
+  .milestone-panel {
+    flex: 0 0 100vw;
+    width: 100vw;
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .milestone-node {
+    padding: var(--space-sm);
+  }
+
+  .milestone-label {
+    font-size: 0.85rem;
+    white-space: normal;
+    max-width: 85%;
+  }
+
+  .branch-text {
+    font-size: 0.65rem;
+    white-space: normal;
+    max-width: 72px;
+    text-align: center;
+  }
+
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ---------- Gift image lightbox (same-page pop open) ---------- */
+.gift-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.gift-lightbox.gift-lightbox-open {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.gift-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.gift-lightbox-image {
+  position: relative;
+  z-index: 1;
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.gift-lightbox-hint {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-md);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+}
+
+/* ---------- Very small screens ---------- */
+@media (max-width: 480px) {
+  .milestone-panel {
+    padding: var(--space-lg) var(--space-sm);
+  }
+}
